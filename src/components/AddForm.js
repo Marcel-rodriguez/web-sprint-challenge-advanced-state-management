@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { addSmurf } from '../actions/smurfAction';
 
 const AddForm = (props) => {
     const [state, setState] = useState({
@@ -24,6 +27,14 @@ const AddForm = (props) => {
             //dispatch a custom error action
         } else {
             //dispatch an addSmurf action
+            props.addSmurf(state)
+            setState({
+                ...state,
+                name:"",
+                position:"",
+                nickname:"",
+                description:""
+            })
         }
     }
 
@@ -54,7 +65,13 @@ const AddForm = (props) => {
     </section>);
 }
 
-export default AddForm;
+const mapStateToProps = (state) => {
+    return {
+        smurfs: state.smurfs
+    }
+}
+
+export default connect(mapStateToProps, {addSmurf})(AddForm);
 
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.

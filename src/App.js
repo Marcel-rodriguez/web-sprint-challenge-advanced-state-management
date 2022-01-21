@@ -11,6 +11,7 @@ import "./App.css";
 import { connect } from "react-redux";
 
 const App = (props)=> {
+  console.log('App', props)
   useEffect(() => {
     props.getSmurfs()
   }, [])
